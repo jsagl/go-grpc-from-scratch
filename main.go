@@ -2,8 +2,8 @@ package main
 
 import (
 	"context"
-	"github.com/jsagl/go-grpc-from-scratch/pkg/protocol/grpc"
-	"github.com/jsagl/go-grpc-from-scratch/pkg/service/v1"
+	"github.com/jsagl/go-grpc-from-scratch/api/service/v1"
+	"github.com/jsagl/go-grpc-from-scratch/server/grpc"
 	"github.com/jsagl/go-grpc-from-scratch/storage/postgres"
 	"log"
 )

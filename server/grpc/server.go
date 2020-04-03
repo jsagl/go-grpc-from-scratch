@@ -2,14 +2,13 @@ package grpc
 
 import (
 	"context"
+	"github.com/jsagl/go-grpc-from-scratch/api/proto/v1"
 	"log"
 	"net"
 	"os"
 	"os/signal"
 
 	"google.golang.org/grpc"
-
-	"github.com/jsagl/go-grpc-from-scratch/pkg/api/v1"
 )
 
 func RunServer(ctx context.Context, v1API v1.RecipeServiceServer, port string) error {

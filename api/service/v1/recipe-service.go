@@ -2,7 +2,7 @@ package v1
 
 import (
 	"context"
-	"github.com/jsagl/go-grpc-from-scratch/pkg/api/v1"
+	"github.com/jsagl/go-grpc-from-scratch/api/proto/v1"
 	"github.com/jsagl/go-grpc-from-scratch/storage"
 )
 

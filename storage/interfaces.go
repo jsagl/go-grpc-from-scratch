@@ -2,7 +2,7 @@ package	storage
 
 import (
 	"context"
-	v1 "github.com/jsagl/go-grpc-from-scratch/pkg/api/v1"
+	"github.com/jsagl/go-grpc-from-scratch/api/proto/v1"
 )
 
 type RecipeStore interface {
