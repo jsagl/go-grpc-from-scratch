@@ -1,6 +1,8 @@
 syntax = "proto3";
 package v1;
 
+import "google/api/annotations.proto";
+
 message Recipe {
     int64 id = 1;
     string title = 2;
@@ -24,7 +26,15 @@ message ReadAllResponse{
 
 // Service to manage list of recipes
 service RecipeService {
-    rpc Read(ReadRequest) returns (ReadResponse);
+    rpc Read(ReadRequest) returns (ReadResponse) {
+        option (google.api.http) = {
+           get: "/v1/recipes/{id}"
+       };
+    };
 
-    rpc ReadAll(ReadAllRequest) returns (ReadAllResponse);
+    rpc ReadAll(ReadAllRequest) returns (ReadAllResponse) {
+        option (google.api.http) = {
+           get: "/v1/recipes"
+       };
+    };;
 }

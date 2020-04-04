@@ -11,7 +11,7 @@ import (
 	"google.golang.org/grpc"
 )
 
-func RunServer(ctx context.Context, v1API v1.RecipeServiceServer, port string) error {
+func StartGRPC(ctx context.Context, v1API v1.RecipeServiceServer, port string) error {
 	listen, err := net.Listen("tcp", ":"+port)
 	if err != nil {
 		return err
