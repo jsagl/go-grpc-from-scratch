@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"database/sql"
+	"fmt"
 	"github.com/jsagl/go-grpc-from-scratch/api/service/v1"
 	"github.com/jsagl/go-grpc-from-scratch/server/grpc"
 	"github.com/jsagl/go-grpc-from-scratch/server/rest"
@@ -42,6 +43,9 @@ func main() {
 
 	httpPort := os.Getenv("PORT")
 	grpcPort := os.Getenv("GRPC_PORT")
+
+	fmt.Println("http" + httpPort)
+	fmt.Println("grpc" + grpcPort)
 
 	// run HTTP gateway
 	go func() {
