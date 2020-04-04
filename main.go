@@ -15,7 +15,6 @@ import (
 
 func main() {
 	viper.SetConfigFile(".env")
-	err := viper.ReadInConfig()
 	if err := viper.ReadInConfig(); err != nil {
 		if _, ok := err.(viper.ConfigFileNotFoundError); ok {
 			fmt.Println("No .env file was found")
