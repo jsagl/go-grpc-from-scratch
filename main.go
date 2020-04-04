@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"database/sql"
+	"fmt"
 	"github.com/jsagl/go-grpc-from-scratch/api/service/v1"
 	"github.com/jsagl/go-grpc-from-scratch/server/grpc"
 	"github.com/jsagl/go-grpc-from-scratch/server/rest"
@@ -15,9 +16,14 @@ import (
 func main() {
 	viper.SetConfigFile(".env")
 	err := viper.ReadInConfig()
-	if err != nil {
-		log.Fatalf("Error while reading config file %s", err)
+	if err := viper.ReadInConfig(); err != nil {
+		if _, ok := err.(viper.ConfigFileNotFoundError); ok {
+			fmt.Println("No .env file was found")
+		} else {
+			log.Fatalf("Error while reading config file %s", err)
+		}
 	}
+
 
 	ctx := context.Background()
 
