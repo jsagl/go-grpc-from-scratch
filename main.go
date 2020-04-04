@@ -21,7 +21,7 @@ func main() {
 
 	ctx := context.Background()
 
-	dbAddress := viper.Get("POSTGRES_DATABASE_URL").(string)
+	dbAddress := viper.Get("DATABASE_URL").(string)
 	db, err := sql.Open("postgres", dbAddress)
 	if err != nil {
 		log.Panic(err)
