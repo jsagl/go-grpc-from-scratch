@@ -21,7 +21,8 @@ func main() {
 
 	ctx := context.Background()
 
-	db, err := sql.Open("postgres", "postgres://postgres:@localhost:5432/go_recipes")
+	dbAddress := viper.Get("POSTGRES_DATABASE_URL").(string)
+	db, err := sql.Open("postgres", dbAddress)
 	if err != nil {
 		log.Panic(err)
 	}
