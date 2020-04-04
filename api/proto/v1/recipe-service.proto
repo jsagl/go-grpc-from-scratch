@@ -1,7 +1,33 @@
 syntax = "proto3";
 package v1;
 
+import "protoc-gen-swagger/options/annotations.proto";
 import "google/api/annotations.proto";
+
+option (grpc.gateway.protoc_gen_swagger.options.openapiv2_swagger) = {
+	info: {
+		title: "Recipe service";
+		version: "1.0";
+		contact: {
+			name: "jean";
+			url: "https://github.com/jsagl/go-grpc-from-scratch";
+        };
+    };
+    schemes: HTTP;
+    consumes: "application/json";
+    produces: "application/json";
+    responses: {
+		key: "404";
+		value: {
+			description: "Returned when the resource does not exist.";
+			schema: {
+				json_schema: {
+					type: STRING;
+				}
+			}
+		}
+	}
+};
 
 message Recipe {
     int64 id = 1;
