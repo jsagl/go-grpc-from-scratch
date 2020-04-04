@@ -8,10 +8,17 @@ import (
 	"github.com/jsagl/go-grpc-from-scratch/server/rest"
 	"github.com/jsagl/go-grpc-from-scratch/storage/postgres"
 	_ "github.com/lib/pq"
+	"github.com/spf13/viper"
 	"log"
 )
 
 func main() {
+	viper.SetConfigFile(".env")
+	err := viper.ReadInConfig()
+	if err != nil {
+		log.Fatalf("Error while reading config file %s", err)
+	}
+
 	ctx := context.Background()
 
 	db, err := sql.Open("postgres", "postgres://postgres:@localhost:5432/go_recipes")
@@ -28,11 +35,14 @@ func main() {
 	recipeStore := storage.NewPostgresRecipeStore(db)
 	v1RecipeServiceServer := v1.NewRecipeServiceServer(recipeStore)
 
+	httpPort := viper.Get("PORT").(string)
+	grpcPort := viper.Get("GRPC_PORT").(string)
+
 	// run HTTP gateway
 	go func() {
-		_ = rest.StartHTTP(ctx)
+		_ = rest.StartHTTP(ctx, httpPort, grpcPort)
 	}()
 
-	grpc.StartGRPC(ctx, v1RecipeServiceServer, "8080")
+	grpc.StartGRPC(ctx, v1RecipeServiceServer, grpcPort)
 
 }

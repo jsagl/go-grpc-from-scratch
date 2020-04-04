@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-func StartHTTP(ctx context.Context) error {
+func StartHTTP(ctx context.Context, httpPort string, grpcPort string) error {
 	ctx, cancel := context.WithCancel(ctx)
 	defer cancel()
 
@@ -20,13 +20,15 @@ func StartHTTP(ctx context.Context) error {
 	// Note: Make sure the gRPC server is running properly and accessible
 	mux := runtime.NewServeMux()
 	opts := []grpc.DialOption{grpc.WithInsecure()}
-	err := v1.RegisterRecipeServiceHandlerFromEndpoint(ctx, mux,  "localhost:8080", opts)
+	endpoint := "localhost:" + grpcPort
+	err := v1.RegisterRecipeServiceHandlerFromEndpoint(ctx, mux,  endpoint, opts)
 	if err != nil {
 		return err
 	}
 
+	addr := ":" + httpPort
 	srv := &http.Server{
-		Addr:    ":8081",
+		Addr:    addr,
 		Handler: mux,
 	}
 
